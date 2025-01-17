@@ -1,6 +1,7 @@
 // Select elements
 const toggleButton = document.querySelector(".toggle-button");
-const display = document.querySelector("input[type='text']");
+const display = document.getElementById("display");
+const equationDisplay = document.getElementById("equation-display"); // New line to get the equation display element
 const buttons = document.querySelectorAll(".btn");
 
 // Initialize calculator state
@@ -11,13 +12,23 @@ let darkMode = false; // For dark mode toggle
 
 // Update the display function
 function updateDisplay(value) {
-    display.value = value || "123456"; // Show "0" if value is empty
+    display.value = value || "0"; // Show "0" if value is empty
+}
+
+// Update the equation display function
+function updateEquationDisplay() {
+    if (previousValue !== "" && operator !== "") {
+        equationDisplay.textContent = `${previousValue} ${operator} ${currentValue}`;
+    } else {
+        equationDisplay.textContent = currentValue;
+    }
 }
 
 // Handle number and dot input
 function appendNumber(number) {
     if (number === "." && currentValue.includes(".")) return; // Prevent multiple dots
     currentValue += number;
+    updateEquationDisplay();
     updateDisplay(currentValue);
 }
 
@@ -28,6 +39,7 @@ function chooseOperator(op) {
     operator = op;
     previousValue = currentValue;
     currentValue = ""; // Reset for the next number
+    updateEquationDisplay();
 }
 
 // Perform the calculation
@@ -58,6 +70,7 @@ function compute() {
     currentValue = result.toString();
     operator = "";
     previousValue = "";
+    updateEquationDisplay();  // Update the equation display after computation
     updateDisplay(currentValue);
 }
 
@@ -66,12 +79,14 @@ function clearAll() {
     currentValue = "";
     previousValue = "";
     operator = "";
+    updateEquationDisplay();
     updateDisplay("0");
 }
 
 // Delete the last character
 function deleteLast() {
     currentValue = currentValue.slice(0, -1); // Remove the last character
+    updateEquationDisplay();
     updateDisplay(currentValue || "0"); // Ensure it doesn't go below 0
 }
 
@@ -89,6 +104,7 @@ function toggleDarkMode() {
 function percentage() {
     if (currentValue === "") return;
     currentValue = (parseFloat(currentValue) / 100).toString();
+    updateEquationDisplay();
     updateDisplay(currentValue);
 }
 
@@ -98,6 +114,7 @@ function togglePrefix() {
     currentValue = currentValue.startsWith("-")
         ? currentValue.slice(1)
         : "-" + currentValue;
+    updateEquationDisplay();
     updateDisplay(currentValue);
 }
 
@@ -135,3 +152,4 @@ toggleButton.addEventListener("click", toggleDarkMode);
 
 // Initialize the display with "0" on page load
 updateDisplay("0");
+updateEquationDisplay();  // Initialize the equation display as well

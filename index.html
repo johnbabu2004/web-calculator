@@ -14,11 +14,11 @@
                 <i class="fa-solid fa-calculator"></i>
                 <span>Calculator</span>
             </div>
-            <div class="window-controls">
+            <!-- <div class="window-controls">
                 <i class="fa-regular fa-window-minimize"></i>
                 <i class="fa-solid fa-window-restore"></i>
                 <i class="fa-solid fa-xmark"></i>
-            </div> 
+            </div>  -->
         </header>
         <main>
         <div class="side-bar-area">
@@ -30,7 +30,8 @@
 
         </div>
         <div class="calc-area">
-            <input type="text" value="0">
+            <div id="equation-display"></div> <!-- This will display the equation -->
+            <input type="text" value="0" id="display">
         </div>
         <div class="grid-area">
             <button class="btn" id="clear">AC</button>

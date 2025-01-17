@@ -100,4 +100,26 @@ button{
 .btn,.window-controls>i,.side-bar-area>i{
     cursor: pointer;
 }
+/* Ensure the equation display has a fixed height and consistent layout */
+#equation-display {
+    font-size: 1.2em;
+    color: #888;
+    text-align: right;
+    margin-bottom: 10px;
+    height: 40px; /* Fixed height to prevent shifting */
+    line-height: 40px; /* Align text vertically */
+    overflow: hidden; /* Ensure the text doesn't overflow */
+}
 
+/* Input field styling */
+input[type="text"] {
+    font-size: 2em;
+    padding: 10px;
+    text-align: right;
+    width: 100%;
+    background-color: #f4f4f4;
+    height: 60px; /* Fixed height to prevent shifting */
+    box-sizing: border-box; /* Ensure padding doesn't add extra size */
+}
+
+/* Rest of the button and dark mode styling can remain the same */
